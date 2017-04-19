@@ -29,7 +29,7 @@ public class PassengerController {
 	public Passenger getPassenger(@PathVariable int id, @RequestParam Boolean json){
 		Passenger test = null;
 		if(json==true){
-			test = new Passenger(id, "miao", "Wang", 26, "female", "4086464171");			
+			test = new Passenger(id, "m", "W", 26, "female", "11111111");			
 		}
 		return test;
 	}    
@@ -37,7 +37,7 @@ public class PassengerController {
 	public Passenger getPassengerII(@PathVariable int id, @RequestParam Boolean xml){
 		Passenger test = null;
 		if(xml==true){
-			test = new Passenger(id, "miao", "Wang", 26, "female", "4086464171");			
+			test = new Passenger(id, "m", "w", 26, "female", "11122222");			
 		}
 		return test;
 	}
