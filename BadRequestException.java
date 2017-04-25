@@ -7,24 +7,39 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value=HttpStatus.NOT_FOUND)
 public class BadRequestException extends RuntimeException {
-	private int passengerID;
+	private Object ID;//if -1 means no id involved 
 	private String errorMsg;
-	public BadRequestException(int id, String str) {
+	private int statusCode;
+	public BadRequestException(Object id, String str) {
 		// TODO Auto-generated constructor stub
 		super();
-		this.setPassengerID(id);
+		this.setID(id);
 		this.errorMsg = str;
 	}
-	public int getPassengerID() {
-		return passengerID;
+	public BadRequestException( String str, int statusCode) {
+		// TODO Auto-generated constructor stub
+		super();
+		this.errorMsg = str;
+		this.statusCode = statusCode;
 	}
-	public void setPassengerID(int passengerID) {
-		this.passengerID = passengerID;
-	}
+
 	public String getErrorMsg() {
 		return errorMsg;
 	}
 	public void setErrorMsg(String errorMsg) {
 		this.errorMsg = errorMsg;
 	}
+	public int getStatusCode() {
+		return statusCode;
+	}
+	public void setStatusCode(int statusCode) {
+		this.statusCode = statusCode;
+	}
+	public Object getID() {
+		return ID;
+	}
+	public void setID(Object iD) {
+		ID = iD;
+	}
+	
 }

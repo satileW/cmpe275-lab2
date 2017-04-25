@@ -1,20 +1,18 @@
 package edu.sjsu.cmpe275.lab2;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+
 
 /* this is uniform success status code */
 
-//@XmlRootElement
-public class Response extends AbstractReponse {
-	//@XmlElement
+public class Response {
+	private int code;
+	private String msg;
 	public int getCode() {
 		return code;
 	}
 	public void setCode(int code){
 		this.code = code;
 	}
-	//@XmlElement
 	public String getMsg() {
 		return msg;
 	}

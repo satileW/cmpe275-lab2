@@ -1,9 +1,9 @@
 package edu.sjsu.cmpe275.lab2;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
-public class BadRequest extends AbstractReponse{
+public class BadRequest{
+	private int code;
+	private String msg;
 	public BadRequest(int statusCode, String str) {
 		// TODO Auto-generated constructor stub
 		this.code = statusCode;

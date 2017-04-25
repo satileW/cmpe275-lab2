@@ -1,19 +1,61 @@
 package edu.sjsu.cmpe275.lab2;
 
-//import javax.xml.bind.annotation.XmlRootElement;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+//import javax.xml.bind.annotation.XmlTransient;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Passenger")
+@XmlRootElement
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Passenger {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "ID")
+	private int id;
+	
+	@Column(name = "FIRST_NAME", nullable = false)
+	private String firstName;
+	
+	@Column(name = "LAST_NAME", nullable = false)
+	private String lastName;
+	
+	@Column(name = "AGE")
+	private int age;
+	
+	@Column(name = "GENDER")
+	private String gender;
+	
+	@Column(name = "PHONE", nullable = false, unique = true)
+	private String phone;//must be unique
+	
+	//@OneToMany(mappedBy = "passenger")
+	//private Set<Reservation> reservations = new HashSet<Reservation>();
+	//@OneToMany(targetEntity = Reservation.class, mappedBy = "passenger")
+	//private Set<Reservation> reservations = new HashSet<Reservation>();
+	
 	public Passenger(){
-		super();
 	}
-	public Passenger(int id, String firstname, String lastname, int age, String gender, String phone){
-		this.id = id;
-		this.firstName = firstname;
-		this.lastName = lastname;
-		this.setAge(age);
-		this.setGender(gender);
-		this.phone = phone;
+	public Passenger(String _firstname, String _lastname, int _age, String _gender, String _phone){
+		this.firstName = _firstname;
+		this.lastName = _lastname;
+		this.age = _age;
+		this.gender = _gender;
+		this.phone = _phone;
 	}
 	public int getId() {
 		return id;
@@ -51,11 +93,15 @@ public class Passenger {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	private int id;
-	private String firstName;
-	private String lastName;
-	private int age;
-	private String gender;
-	private String phone;//must be unique
+	
+	/*
+	public Set<Reservation> getReservations() {
+		return reservations;
+	}
+	public void setReservations(Set<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+	*/
+	
 	
 }
