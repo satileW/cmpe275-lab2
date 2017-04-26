@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 //import javax.xml.bind.annotation.XmlTransient;
@@ -21,6 +22,7 @@ import javax.persistence.Table;
 @Table(name="Passenger")
 @XmlRootElement
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Passenger {
 	
 	@Id

@@ -134,6 +134,7 @@ public class PassengerController {
 				
 		Passenger passenger = passengerRepository.findOne(id);
 		if(passenger==null){
+			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			throw new BadRequestException(id, "Passenger with id");
 		}
 		storePassenger(passenger, firstname, lastname, age, gender, phone, response);
@@ -153,7 +154,7 @@ public class PassengerController {
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			throw new BadRequestException(id, "Passenger with id");
 		}
-		return new ResponseEntity<>(new BadRequest(200, "Passenger with id "+id+" is deleted successfully "),HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(new Response(200, "Passenger with id "+id+" is deleted successfully "),HttpStatus.ACCEPTED);
 		//TODO delete reservation, update leftseats, SUCCESSFUL response
 		
 	}

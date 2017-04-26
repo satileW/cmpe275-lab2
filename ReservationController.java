@@ -97,7 +97,8 @@ public class ReservationController {
 		if(reservationRepository.exists(number)){
 			return storeReservation2(reservationRepository.findOne(number), flightsAdded, flightsRemoved, response);
 		} else {
-			return "bad request"; //TODO
+			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			throw new BadRequestException(number, "Resevation with number");
 		}
 		
 		//return reservationRepository.findOne(reservation.getOrderNumber());
@@ -226,10 +227,10 @@ public class ReservationController {
 					fAdd.add(flightRepository.findOne(f));
 				}
 			}
-			if(fAdd.size()==flightsAdded.length){
+			if(fAdd.size()!=flightsAdded.length){
 				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 				throw new BadRequestException("some new flights you want to add are not existing",404);
-			}
+			}	
 		}
 		if(flightsRemoved.length!=0){
 			for(String f : flightsRemoved){
@@ -295,11 +296,11 @@ public class ReservationController {
 			price += flight.getPrice();
 			flights.add(flight);
 		}
-		
+		//System.out.println("111111111");
 		reservation.setPrice(price);
 		reservation.setFlights(flights);
 		reservation.setPassenger(passenger);
-
+		//System.out.println("222222222");
 		return removePassenger(reservationRepository.save(reservation));
 		
 	}
@@ -327,10 +328,10 @@ public class ReservationController {
 		
 		Flight previousFlight = null;
 		for(Flight flight: queue){
+			System.out.println(flight.getDepartureTime()+"!!!"+flight.getArrivalTime());
 			if(previousFlight!=null&&previousFlight.getArrivalTime().before(flight.getDepartureTime())){
 				previousFlight = flight;
-				continue;
-			}else if(!previousFlight.getArrivalTime().before(flight.getDepartureTime())){
+			}else if(previousFlight!=null&&!previousFlight.getArrivalTime().before(flight.getDepartureTime())){
 				return false;
 			}
 		}

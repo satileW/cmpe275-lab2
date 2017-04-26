@@ -136,6 +136,7 @@ public class FlightController {
 		*/
 		Flight f = flightRepository.findOne(flight.getNumber());
 		if(f==null){
+			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			throw new BadRequestException(flightNumber, "Airline with flightNumber");
 		}
 		return f;
